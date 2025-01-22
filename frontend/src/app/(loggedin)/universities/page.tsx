@@ -7,7 +7,7 @@ import Searchbar from "@/components/Searchbar";
 export default async function Universities({
   searchParams,
 }: {
-  searchParams?: { [key: string]: string | undefined };
+  searchParams?: Promise<{ [key: string]: string | undefined }>;
 }) {
   const query = (await searchParams)?.query;
   if (query) {

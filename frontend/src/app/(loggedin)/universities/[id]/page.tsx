@@ -15,11 +15,15 @@ import { applyUniversity } from "./action";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
-export default async function Page({ params }: { params: { id: string } }) {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
   const user = await getUser();
-  const university = (await getUniversityById(params.id))?.data;
+  const university = (await getUniversityById((await params).id))?.data;
   const isApplied = user
-    ? (await checkIfAlreadyApplied(params.id))?.payload
+    ? (await checkIfAlreadyApplied((await params).id))?.payload
     : false;
   return (
     <>
